@@ -4,6 +4,23 @@ const connection = require("./database/connection");
 
 const { index, createUsers } = require("./controllers/UsersController");
 const { create } = require("./controllers/SessionController");
+const {
+  createCategory,
+  listCategory,
+  deleteCategory
+} = require("./controllers/CategoryController");
+const {
+  createGains,
+  listGains,
+  updateGains,
+  deleteGains
+} = require("./controllers/GainsController");
+const {
+  createExpenses,
+  listExpenses,
+  updateExpenses,
+  deleteExpenses
+} = require("./controllers/ExpensesController");
 
 const routes = express.Router();
 
@@ -20,9 +37,23 @@ routes.get("/", async (req, res) => {
     return res.status(400).json(error);
   }
 });
+routes.post("/sessions", create);
+
 routes.get("/user", index);
 routes.post("/user", createUsers);
 
-routes.post("/sessions", create);
+routes.get("/category", listCategory);
+routes.post("/category", createCategory);
+routes.delete("/category", deleteCategory);
+
+routes.get("/gains", listGains);
+routes.post("/gains", createGains);
+routes.put("/gains", updateGains);
+routes.delete("/gains", deleteGains);
+
+routes.get("/expenses", listExpenses);
+routes.post("/expenses", createExpenses);
+routes.put("/expenses", updateExpenses);
+routes.delete("/expenses", deleteExpenses);
 
 module.exports = routes;

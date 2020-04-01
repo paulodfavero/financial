@@ -13,7 +13,7 @@ module.exports = {
     }
   },
   async createUsers(req, res) {
-    const { name, email, whatsapp, password } = req.body;
+    const { name, email, whatsapp, password, city, uf } = req.body;
     const id = crypto.randomBytes(4).toString("HEX");
     const hash = await bcrypt.hash(password, 10);
 
@@ -23,7 +23,9 @@ module.exports = {
         name,
         email,
         whatsapp,
-        password: hash
+        password: hash,
+        city,
+        uf
       });
       return res.json({ id });
     } catch (error) {
